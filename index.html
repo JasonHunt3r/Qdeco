@@ -26,14 +26,30 @@
         h1 { color: #f0f6fc; font-size: 2.5rem; margin-bottom: 0.5rem; font-weight: 700; }
         .tagline { color: var(--text-muted); font-size: 1.2rem; }
         .features { margin: 3rem 0; display: grid; gap: 1.5rem; }
+        
+        /* Updated Card Structure for Icons */
         .card {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
             border-radius: 12px;
-            padding: 1.5rem;
+            padding: 1.75rem;
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
         }
-        .card h3 { color: #f0f6fc; margin-bottom: 0.5rem; }
-        .card p { color: var(--text-muted); }
+        .app-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 18px;
+            flex-shrink: 0;
+            object-fit: cover;
+            background: #21262d;
+            border: 1px solid var(--border-color);
+        }
+        .card-content { flex-grow: 1; }
+        .card h3 { color: #f0f6fc; margin-bottom: 0.5rem; font-size: 1.3rem; }
+        .card p { color: var(--text-muted); font-size: 1rem; }
+        
         footer {
             text-align: center;
             margin-top: 5rem;
@@ -66,6 +82,10 @@
             margin-top: 1rem;
         }
         .btn:hover { opacity: 0.9; }
+
+        @media (max-width: 600px) {
+            .card { flex-direction: column; text-align: center; align-items: center; }
+        }
     </style>
 </head>
 <body>
@@ -76,13 +96,31 @@
         </header>
 
         <section class="features">
+            <!-- Up Scaler -->
             <div class="card">
-                <h3>Sleek Architecture</h3>
-                <p>Designed natively for performance, reliability, and minimalist aesthetics.</p>
+                <img src="upscaler-icon.png" alt="Up Scaler Icon" class="app-icon">
+                <div class="card-content">
+                    <h3>Up Scaler</h3>
+                    <p>High-performance image and asset upscaling utility built natively for speed, reliability, and minimalist desktop aesthetics.</p>
+                </div>
             </div>
+
+            <!-- RhythmIO -->
             <div class="card">
-                <h3>Privacy Focused</h3>
-                <p>Your data stays exactly where it belongs: on your device. No hidden tracking.</p>
+                <img src="rhythmio-icon.png" alt="RhythmIO Icon" class="app-icon">
+                <div class="card-content">
+                    <h3>RhythmIO</h3>
+                    <p>Advanced media timeline coordinator. Build highly flexible, customized shows and dynamic video sequences with precision editing.</p>
+                </div>
+            </div>
+
+            <!-- BGTools -->
+            <div class="card">
+                <img src="bgtools-icon.png" alt="BGTools Icon" class="app-icon">
+                <div class="card-content">
+                    <h3>BGTools</h3>
+                    <p>The ultimate desktop control center. Run gorgeous slideshows and dynamic videos behind your icons or right in front, flawlessly mapped across spaces and multiple monitors.</p>
+                </div>
             </div>
         </section>
 
