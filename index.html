@@ -27,7 +27,6 @@
         .tagline { color: var(--text-muted); font-size: 1.2rem; }
         .features { margin: 3rem 0; display: grid; gap: 1.5rem; }
         
-        /* Updated Card Structure for Icons */
         .card {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
@@ -35,7 +34,7 @@
             padding: 1.75rem;
             display: flex;
             gap: 1.5rem;
-            align-items: flex-start;
+            align-items: center;
         }
         .app-icon {
             width: 80px;
@@ -47,7 +46,7 @@
             border: 1px solid var(--border-color);
         }
         .card-content { flex-grow: 1; }
-        .card h3 { color: #f0f6fc; margin-bottom: 0.5rem; font-size: 1.3rem; line-height: 1.2; }
+        .card h3 { color: #f0f6fc; margin-bottom: 0.5rem; font-size: 1.3rem; }
         .card p { color: var(--text-muted); font-size: 1rem; }
         
         footer {
@@ -96,30 +95,30 @@
         </header>
 
         <section class="features">
-            <!-- Up Scaler -->
-            <div class="card">
-                <img src="upscaler-icon.png" alt="Up Scaler Icon" class="app-icon">
-                <div class="card-content">
-                    <h3>Up Scaler</h3>
-                    <p>High-performance image and asset upscaling utility built natively for speed, reliability, and minimalist desktop aesthetics.</p>
-                </div>
-            </div>
-
-            <!-- RhythmIO -->
+            <!-- 1. RhythmIO -->
             <div class="card">
                 <img src="rhythmio-icon.png" alt="RhythmIO Icon" class="app-icon">
                 <div class="card-content">
                     <h3>RhythmIO</h3>
-                    <p>Advanced media timeline coordinator. Build highly flexible, customized shows and dynamic video sequences with precision editing.</p>
+                    <p>Designed as an intuitive approach to media composition, RhythmIO combines ideas from the realm of musical rhythm to offer creators tools that help them rapidly deploy visual beats that aren't constrained by a typical slide player's duration and transition limitations. Taking the simple concept of a slide show and making the slides themselves into a flexible unit to base the editor's design principles around, you'll find that RhythmIO blends many of the capabilities you love about some of your favorite tools into an easy to use workflow that supports anything from a quick slide deck to a wedding or birthday montage to a music video or podcast. You can make a movie with it, or cut together your band's YouTube show... It's all about what goes in and what comes out. Engineered natively for creators who demand flawless timing, it effortlessly scales up to match and agree with the muscle memory of long-time production pros.</p>
                 </div>
             </div>
 
-            <!-- BGTools -->
+            <!-- 2. BGTools -->
             <div class="card">
                 <img src="bgtools-icon.png" alt="BGTools Icon" class="app-icon">
                 <div class="card-content">
                     <h3>BGTools</h3>
-                    <p>The ultimate desktop control center. Run gorgeous slideshows and dynamic videos behind your icons or right in front, flawlessly mapped across spaces and multiple monitors.</p>
+                    <p>The ultimate desktop canvas control center and Apple's gift to background customization lovers. Entirely standalone, it allows you to build custom timings and fluid playlists for your desktop background art, including video clips. Lightweight and easy to use, it lets you seamlessly run slideshows behind your icons or in focus windows right in front, flawlessly mapped across spaces and multiple monitors. While incredibly powerful on its own, it becomes even more useful in conjunction with RhythmIO to ingest highly advanced timeline shows.</p>
+                </div>
+            </div>
+
+            <!-- 3. UP Scaler -->
+            <div class="card">
+                <img src="upscaler-icon.png" alt="UP Scaler Icon" class="app-icon">
+                <div class="card-content">
+                    <h3>UP Scaler</h3>
+                    <p>Don't watch a progress bar, watch the show instead! UP Scaler is a slide deck player and image upscaler all rolled into one. Built natively for speed, security, and minimalist aesthetics, it processes heavy raster textures and design renders locally with complete privacy. The integrated comparison tools and the adjustable playlist with simple Ken Burns style effects let you compare your settings, turning the chore of batch processing into an entertaining diversion.</p>
                 </div>
             </div>
         </section>
