@@ -1,114 +1,104 @@
-{\rtf1\ansi\ansicpg1252\cocoartf2907
-\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fmodern\fcharset0 Courier;}
-{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red255\green255\blue255;}
-{\*\expandedcolortbl;;\cssrgb\c0\c1\c1;\cssrgb\c100000\c100000\c99971;}
-\margl1440\margr1440\vieww11520\viewh8400\viewkind0
-\deftab720
-\pard\pardeftab720\partightenfactor0
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qdeco | Elegant Apps</title>
+    <style>
+        :root {
+            --bg-color: #0d1117;
+            --card-bg: #161b22;
+            --text-color: #c9d1d9;
+            --text-muted: #8b949e;
+            --accent-color: #58a6ff;
+            --border-color: #30363d;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            padding: 2rem 1rem;
+        }
+        .container { max-width: 800px; margin: 0 auto; }
+        header { text-align: center; padding: 4rem 0 2rem; }
+        h1 { color: #f0f6fc; font-size: 2.5rem; margin-bottom: 0.5rem; font-weight: 700; }
+        .tagline { color: var(--text-muted); font-size: 1.2rem; }
+        .features { margin: 3rem 0; display: grid; gap: 1.5rem; }
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+        .card h3 { color: #f0f6fc; margin-bottom: 0.5rem; }
+        .card p { color: var(--text-muted); }
+        footer {
+            text-align: center;
+            margin-top: 5rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.9rem;
+        }
+        footer a {
+            color: var(--accent-color);
+            text-decoration: none;
+            margin: 0 0.75rem;
+        }
+        footer a:hover { text-decoration: underline; }
+        .support-box {
+            text-align: center;
+            background: linear-gradient(145deg, #1f242c, #161b22);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        .btn {
+            display: inline-block;
+            background: var(--accent-color);
+            color: #ffffff;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 1rem;
+        }
+        .btn:hover { opacity: 0.9; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Qdeco</h1>
+            <p class="tagline">Crafting modern, responsive software utilities.</p>
+        </header>
 
-\f0\fs28 \cf2 \expnd0\expndtw0\kerning0
-<!DOCTYPE html>\
-<html lang="en">\
-<head>\
-    <meta charset="UTF-8">\
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">\
-    <title>Qdeco | Elegant Apps</title>\
-    <style>\
-        :root \{\
-            --bg-color: #0d1117;\
-            --card-bg: #161b22;\
-            --text-color: #c9d1d9;\
-            --text-muted: #8b949e;\
-            --accent-color: #58a6ff;\
-            --border-color: #30363d;\
-        \}\
-        * \{ box-sizing: border-box; margin: 0; padding: 0; \}\
-        body \{\
-            background-color: var(--bg-color);\
-            color: var(--text-color);\
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;\
-            line-height: 1.6;\
-            padding: 2rem 1rem;\
-        \}\
-        .container \{ max-width: 800px; margin: 0 auto; \}\
-        header \{ text-align: center; padding: 4rem 0 2rem; \}\
-        h1 \{ color: #f0f6fc; font-size: 2.5rem; margin-bottom: 0.5rem; font-weight: 700; \}\
-        .tagline \{ color: var(--text-muted); font-size: 1.2rem; \}\
-        .features \{ margin: 3rem 0; display: grid; gap: 1.5rem; \}\
-        .card \{\
-            background: var(--card-bg);\
-            border: 1px solid var(--border-color);\
-            border-radius: 12px;\
-            padding: 1.5rem;\
-        \}\
-        .card h3 \{ color: #f0f6fc; margin-bottom: 0.5rem; \}\
-        .card p \{ color: var(--text-muted); \}\
-        footer \{\
-            text-align: center;\
-            margin-top: 5rem;\
-            padding-top: 2rem;\
-            border-top: 1px solid var(--border-color);\
-            font-size: 0.9rem;\
-        \}\
-        footer a \{\
-            color: var(--accent-color);\
-            text-decoration: none;\
-            margin: 0 0.75rem;\
-        \}\
-        footer a:hover \{ text-decoration: underline; \}\
-        .support-box \{\
-            text-align: center;\
-            background: linear-gradient(145deg, #1f242c, #161b22);\
-            border: 1px solid var(--border-color);\
-            border-radius: 12px;\
-            padding: 2rem;\
-            margin: 2rem 0;\
-        \}\
-        .btn \{\
-            display: inline-block;\
-            background: var(--accent-color);\
-            color: #ffffff;\
-            padding: 0.75rem 1.5rem;\
-            border-radius: 6px;\
-            text-decoration: none;\
-            font-weight: 600;\
-            margin-top: 1rem;\
-        \}\
-        .btn:hover \{ opacity: 0.9; \}\
-    </style>\
-</head>\
-<body>\
-    <div class="container">\
-        <header>\
-            <h1>Qdeco</h1>\
-            <p class="tagline">Crafting modern, responsive software utilities.</p>\
-        </header>\
-\
-        <section class="features">\
-            <div class="card">\
-                <h3>Sleek Architecture</h3>\
-                <p>Designed natively for performance, reliability, and minimalist aesthetics.</p>\
-            </div>\
-            <div class="card">\
-                <h3>Privacy Focused</h3>\
-                <p>Your data stays exactly where it belongs: on your device. No hidden tracking.</p>\
-            </div>\
-        </section>\
-\
-        <section class="support-box">\
-            <h3>Need Assistance?</h3>\
-            <p>Have questions, feedback, or need help with a Qdeco app? We're here for you.</p>\
-            <a href="mailto:support@qdeco.com" class="btn">Contact Support</a>\
-        </section>\
-\
-        <footer>\
-            <p>&copy; 2026 Qdeco. All rights reserved.</p>\
-            <p style="margin-top: 0.5rem;">\
-                <a href="privacy.html">Privacy Policy</a> &bull; \
-                <a href="mailto:support@qdeco.com">Support</a>\
-            </p>\
-        </footer>\
-    </div>\
-</body>\
-</html>\
-}
+        <section class="features">
+            <div class="card">
+                <h3>Sleek Architecture</h3>
+                <p>Designed natively for performance, reliability, and minimalist aesthetics.</p>
+            </div>
+            <div class="card">
+                <h3>Privacy Focused</h3>
+                <p>Your data stays exactly where it belongs: on your device. No hidden tracking.</p>
+            </div>
+        </section>
+
+        <section class="support-box">
+            <h3>Need Assistance?</h3>
+            <p>Have questions, feedback, or need help with a Qdeco app? We're here for you.</p>
+            <a href="mailto:support@qdeco.com" class="btn">Contact Support</a>
+        </section>
+
+        <footer>
+            <p>&copy; 2026 Qdeco. All rights reserved.</p>
+            <p style="margin-top: 0.5rem;">
+                <a href="privacy.html">Privacy Policy</a> &bull; 
+                <a href="mailto:support@qdeco.com">Support</a>
+            </p>
+        </footer>
+    </div>
+</body>
+</html>
