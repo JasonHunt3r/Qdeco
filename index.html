@@ -27,6 +27,7 @@
         .tagline { color: var(--text-muted); font-size: 1.2rem; }
         .features { margin: 3rem 0; display: grid; gap: 1.5rem; }
         
+        /* Updated Card Structure for Icons */
         .card {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
@@ -95,27 +96,30 @@
         </header>
 
         <section class="features">
+            <!-- Up Scaler -->
+            <div class="card">
+                <img src="upscaler-icon.png" alt="Up Scaler Icon" class="app-icon">
+                <div class="card-content">
+                    <h3>Up Scaler</h3>
+                    <p>High-performance image and asset upscaling utility built natively for speed, reliability, and minimalist desktop aesthetics.</p>
+                </div>
+            </div>
+
+            <!-- RhythmIO -->
             <div class="card">
                 <img src="rhythmio-icon.png" alt="RhythmIO Icon" class="app-icon">
                 <div class="card-content">
                     <h3>RhythmIO</h3>
-                    <p>Designed for intuitive media composition, RhythmIO combines musical rhythm concepts to help creators rapidly deploy visual beats without standard slide duration limits.</p>
+                    <p>Advanced media timeline coordinator. Build highly flexible, customized shows and dynamic video sequences with precision editing.</p>
                 </div>
             </div>
 
+            <!-- BGTools -->
             <div class="card">
                 <img src="bgtools-icon.png" alt="BGTools Icon" class="app-icon">
                 <div class="card-content">
                     <h3>BGTools</h3>
-                    <p>A standalone desktop canvas control center for building custom timings and fluid playlists for desktop background art and video clips.</p>
-                </div>
-            </div>
-
-            <div class="card">
-                <img src="upscaler-icon.png" alt="UP Scaler Icon" class="app-icon">
-                <div class="card-content">
-                    <h3>UP Scaler</h3>
-                    <p>A slide deck player and image upscaler built for speed, privacy, and minimalist aesthetics, processing raster textures locally.</p>
+                    <p>The ultimate desktop control center. Run gorgeous slideshows and dynamic videos behind your icons or right in front, flawlessly mapped across spaces and multiple monitors.</p>
                 </div>
             </div>
         </section>
