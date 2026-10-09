@@ -170,7 +170,7 @@ nav button[aria-current="true"]::after{content:"";position:absolute;left:10px;ri
 .moving .phline{box-shadow:0 0 16px rgba(255,61,61,.55)}
 .rline{position:absolute;top:-25px;bottom:0;width:1px;margin-left:-.5px;background:var(--range);opacity:.6;pointer-events:none;z-index:2}
 .lane{position:relative;overflow-x:clip}
-.mod{position:absolute;inset:0 0 auto 0;padding:8px 60px 64px 48px}
+.mod{position:absolute;inset:0 0 auto 0;padding:8px 110px 64px 96px}
 .mod[hidden]{display:none!important}
 .mod.pix{filter:url(#pixelate);pointer-events:none}
 /* the pixelated copy: a low-resolution snapshot of the page, blown up with hard pixel edges (works in every browser) */
@@ -384,12 +384,14 @@ const keys=['qdeco','rhythmio','bgtools','up','about','support'];
    The header spans [tL,tR], the range [tIn,tOut], the playhead sits at pt. */
 const frameEl=document.querySelector('.frame'), hdr=$('hdr'), bar=$('bar'), gL=$('gL'), gR=$('gR');
 const KEY='qdeco.margins.v2', MIN_GAP=0.375*SPAN, MIN_HDR=440, SNAP=SPAN/64;
-const DEF=[SPAN/16, SPAN*15/16];
+// The defaults at the widest (the ruler 1200 px): Jason's layout measured from his
+// window, 2026-10-09: the header 1.508–8.858 s (882 px), the reading range 1.9625–8.367 s.
+const DEF=[1.9625, 8.367], DEFH=[1.508, 8.858];
 let store={custom:null,mode:'default'};
 try{const s=JSON.parse(localStorage.getItem(KEY)||'null'); if(s&&Array.isArray(s.custom)) store=s;}catch(e){}
 const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(store))}catch(e){}};
 let m = store.mode==='custom'&&store.custom ? store.custom.slice() : DEF.slice();
-let tL=0, tR=SPAN, pan=0, pps=100, originX=0, FW=1000;
+let tL=DEFH[0], tR=DEFH[1], pan=0, pps=100, originX=0, FW=1000;
 const narrow=()=>innerWidth<480;
 const marg=()=>narrow()?[SPAN*0.04,SPAN*0.96]:m;
 const snap=v=>Math.round(v/SNAP)*SNAP;
@@ -841,8 +843,8 @@ setMenu.addEventListener('click',e=>{
   else if(act==='wink') wink(1,false);
   else if(act==='play'){ if(reduce) openWin(true); else { clearTimeout(idleTimer); startIdle(); } }
   else if(act==='width'){ store.mode='default'; m=DEF.slice(); m[0]=Math.max(m[0],tL); m[1]=Math.min(m[1],tR); save(); layout(); }
-  else if(act==='header'){ tL=0; tR=SPAN; pan=0; layout(); }
-  else if(act==='all'){ store={custom:null,mode:'default'}; save(); tL=0; tR=SPAN; pan=0; m=DEF.slice(); setCalm(false); setDesk('grid'); layout(); }
+  else if(act==='header'){ tL=DEFH[0]; tR=DEFH[1]; pan=0; layout(); }
+  else if(act==='all'){ store={custom:null,mode:'default'}; save(); tL=DEFH[0]; tR=DEFH[1]; pan=0; m=DEF.slice(); setCalm(false); setDesk('grid'); layout(); }
 });
 setMenu.addEventListener('keydown',e=>{
   const items=[...setMenu.querySelectorAll('button')], i=items.indexOf(document.activeElement);
