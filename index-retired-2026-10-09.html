@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qdeco | Elegant Apps</title>
+    <style>
+        :root {
+            --bg-color: #0d1117;
+            --card-bg: #161b22;
+            --text-color: #c9d1d9;
+            --text-muted: #8b949e;
+            --accent-color: #58a6ff;
+            --border-color: #30363d;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            padding: 2rem 1rem;
+        }
+        .container { max-width: 800px; margin: 0 auto; }
+        header { text-align: center; padding: 4rem 0 2rem; }
+        h1 { color: #f0f6fc; font-size: 2.5rem; margin-bottom: 0.5rem; font-weight: 700; }
+        .tagline { color: var(--text-muted); font-size: 1.2rem; }
+        .features { margin: 3rem 0; display: grid; gap: 1.5rem; }
+        
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.75rem;
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+        .app-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 18px;
+            flex-shrink: 0;
+            object-fit: cover;
+            background: #21262d;
+            border: 1px solid var(--border-color);
+        }
+        .card-content { flex-grow: 1; }
+        .card h3 { color: #f0f6fc; margin-bottom: 0.5rem; font-size: 1.3rem; }
+        .card p { color: var(--text-muted); font-size: 1rem; }
+        
+        footer {
+            text-align: center;
+            margin-top: 5rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.9rem;
+        }
+        footer a {
+            color: var(--accent-color);
+            text-decoration: none;
+            margin: 0 0.75rem;
+        }
+        footer a:hover { text-decoration: underline; }
+        .support-box {
+            text-align: center;
+            background: linear-gradient(145deg, #1f242c, #161b22);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        .btn {
+            display: inline-block;
+            background: var(--accent-color);
+            color: #ffffff;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 1rem;
+        }
+        .btn:hover { opacity: 0.9; }
+
+        @media (max-width: 600px) {
+            .card { flex-direction: column; text-align: center; align-items: center; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Qdeco</h1>
+            <p class="tagline">Crafting modern, responsive software utilities.</p>
+        </header>
+
+        <section class="features">
+            <!-- 1. RhythmIO -->
+            <div class="card">
+                <img src="rhythmio-icon.png" alt="RhythmIO Icon" class="app-icon">
+                <div class="card-content">
+                    <h3>RhythmIO</h3>
+                    <p>Designed as an intuitive approach to media composition, RhythmIO combines ideas from the realm of musical rhythm to offer creators tools that help them rapidly deploy visual beats that aren't constrained by a typical slide player's duration and transition limitations. Taking the simple concept of a slide show and making the slides themselves into a flexible unit to base the editor's design principles around, you'll find that RhythmIO blends many of the capabilities you love about some of your favorite tools into an easy to use workflow that supports anything from a quick slide deck to a wedding or birthday montage to a music video or podcast. You can make a movie with it, or cut together your band's YouTube show... It's all about what goes in and what comes out. Engineered natively for creators who demand flawless timing, it effortlessly scales up to match and agree with the muscle memory of long-time production pros.</p>
+                </div>
+            </div>
+
+            <!-- 2. BGTools -->
+            <div class="card">
+                <img src="bgtools-icon.png" alt="BGTools Icon" class="app-icon">
+                <div class="card-content">
+                    <h3>BGTools</h3>
+                    <p>The ultimate desktop canvas control center and Apple's gift to background customization lovers. Entirely standalone, it allows you to build custom timings and fluid playlists for your desktop background art, including video clips. Lightweight and easy to use, it lets you seamlessly run slideshows behind your icons or in focus windows right in front, flawlessly mapped across spaces and multiple monitors. While incredibly powerful on its own, it becomes even more useful in conjunction with RhythmIO to ingest highly advanced timeline shows.</p>
+                </div>
+            </div>
+
+            <!-- 3. UP Scaler -->
+            <div class="card">
+                <img src="upscaler-icon.png" alt="UP Scaler Icon" class="app-icon">
+                <div class="card-content">
+                    <h3>UP Scaler</h3>
+                    <p>Don't watch a progress bar, watch the show instead! UP Scaler is a slide deck player and image upscaler all rolled into one. Built natively for speed, security, and minimalist aesthetics, it processes heavy raster textures and design renders locally with complete privacy. The integrated comparison tools and the adjustable playlist with simple Ken Burns style effects let you compare your settings, turning the chore of batch processing into an entertaining diversion.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="support-box">
+            <h3>Need Assistance?</h3>
+            <p>Have questions, feedback, or need help with a Qdeco app? We're here for you.</p>
+            <a href="mailto:support@qdeco.com" class="btn">Contact Support</a>
+        </section>
+
+        <footer>
+            <p>&copy; 2026 Qdeco. All rights reserved.</p>
+            <p style="margin-top: 0.5rem;">
+                <a href="privacy.html">Privacy Policy</a> &bull; 
+                <a href="mailto:support@qdeco.com">Support</a>
+            </p>
+        </footer>
+    </div>
+</body>
+</html>
