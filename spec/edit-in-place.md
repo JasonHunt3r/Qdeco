@@ -1,6 +1,6 @@
 # Edit in place
 
-**Status:** Built 2026-10-09 (`4041588`). **Open work:** B-2, B-3.
+**Status:** Built 2026-10-09 (`4041588`); fixed the same evening after Jason's first try found it did not start (`spec/history/2026-10-09-edit-mode-fix.md`). **Open work:** B-2, B-3.
 
 Editing qdeco.com from the page itself. This was the "Edit in place"
 section of `spec/status.md`, moved here word for word on 2026-10-09.
@@ -32,3 +32,31 @@ section of `spec/status.md`, moved here word for word on 2026-10-09.
   spots change); the live site serves it. **Not yet**: edit mode in a real
   browser, and a first real Save (Jason, 2026-10-09: "push it and i'll try
   it live").
+
+## How edit mode shows itself (added 2026-10-09)
+
+Jason's first try: nothing said he was in edit mode, and nothing said
+he had left. Now:
+
+- **Going in**: a blue frame around the whole window, the bar along
+  the bottom ("Editing"), a dashed outline on everything editable, and
+  a note at the top for three seconds: "Edit mode is on. ⌃⌥E or Done
+  to leave."
+- **Going out**: the frame, bar and outlines go, and a grey note says
+  "Edit mode is off."
+- **If it cannot start**: a red note says why, and the page is put
+  back as it was. It never half-opens.
+
+## The page's handles: `window.QPage` (part of the contract)
+
+`edit.js` is a separate file, and `index.html`'s script runs inside a
+closure, so `edit.js` cannot see the page's own variables. The page
+hands it the few it needs, at the end of that closure:
+
+`QPage.maxw` (read and set), `QPage.head`, `QPage.desk`,
+`QPage.layout()`, `QPage.marg()`, `QPage.sizeStage()`, `QPage.pause()`
+and `QPage.resume()`.
+
+Keep that block when editing `index.html` by hand. If the page's
+script is ever reorganised, these names must still mean the same
+things, or edit mode stops with "can't start".

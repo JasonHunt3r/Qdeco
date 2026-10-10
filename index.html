@@ -872,6 +872,17 @@ addEventListener('resize',()=>{layout();buildMark();});
 layout();
 (document.fonts?document.fonts.ready:Promise.resolve()).then(()=>{buildMark();layout();introWipe();scheduleBlink();warmSnapshots();});
 wake();
+
+/* ---------- the page's handles for edit mode ----------
+   edit.js is a separate file and can't see inside this closure. These are the
+   few things it needs (spec/edit-in-place.md). */
+window.QPage={
+  get maxw(){return MAXW}, set maxw(v){MAXW=v},
+  get head(){return [tL,tR]}, get desk(){return desk},
+  layout, marg, sizeStage,
+  pause(){reduce=true; if(idleLoop){clearInterval(idleLoop);idleLoop=null;$('idleTag').classList.remove('on');} clearTimeout(idleTimer);},
+  resume(){reduce=sysReduce||calm; wake();},
+};
 })();
 
 /* ---------- edit in place (Jason's; ⌃⌥E). edit.js loads only when asked. ---------- */
@@ -879,7 +890,7 @@ addEventListener('keydown',e=>{
   if(!(e.ctrlKey&&e.altKey&&e.code==='KeyE'))return;
   e.preventDefault();
   if(window.QEdit){QEdit.toggle();return;}
-  const s=document.createElement('script'); s.src='edit.js?'+Date.now(); s.onload=()=>QEdit.toggle(); document.head.appendChild(s);
+  const s=document.createElement('script'); s.src='edit.js?'+Date.now(); s.onload=()=>QEdit.toggle(); s.onerror=()=>alert('Edit mode did not load (edit.js).'); document.head.appendChild(s);
 });
 </script>
 

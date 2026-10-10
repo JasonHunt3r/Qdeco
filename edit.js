@@ -15,6 +15,7 @@
   const REPO = 'JasonHunt3r/Qdeco', FILE = 'index.html', BRANCH = 'main';
   const API = `https://api.github.com/repos/${REPO}`;
   const TOKEN_KEY = 'qdeco.edit.token';
+  const P = window.QPage;   // the page's own handles (index.html, "the page's handles for edit mode")
 
   let on = false, bar = null, unhidden = [];
   const original = new Map();   // key → innerHTML when edit mode opened
@@ -47,7 +48,24 @@
 #qe-bar button:disabled{opacity:.45;cursor:default}
 #qe-bar .sep{width:1px;align-self:stretch;background:#3a4558}
 #qe-status{flex:1 1 200px;color:#aab6ca}
-#qe-status a{color:#9cc0ff}`;
+#qe-status a{color:#9cc0ff}
+#qe-frame{position:fixed;inset:0;z-index:9998;pointer-events:none;border:3px solid #6aa0ff;box-shadow:inset 0 0 0 1px rgba(10,14,22,.6)}
+#qe-toast{position:fixed;top:18px;left:50%;transform:translateX(-50%);z-index:10000;padding:10px 18px;border-radius:999px;
+  background:#2f6fe0;color:#fff;font:600 14px/1.3 -apple-system,system-ui,sans-serif;box-shadow:0 10px 30px rgba(0,0,0,.45);
+  transition:opacity .4s ease;pointer-events:none}
+#qe-toast.off{background:#2b3446}
+#qe-toast.bad{background:#b3261e}`;
+
+  // ---------- saying so: a frame while editing, and a word going in and out ----------
+  let frame = null, toastEl = null, toastTimer = null;
+  function toast(text, kind, ms) {
+    if (!css.isConnected) document.head.appendChild(css);
+    if (!toastEl) { toastEl = document.createElement('div'); toastEl.id = 'qe-toast'; toastEl.setAttribute('role', 'status'); }
+    toastEl.className = kind || ''; toastEl.textContent = text; toastEl.style.opacity = '1';
+    if (!toastEl.isConnected) document.body.appendChild(toastEl);
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => { toastEl.style.opacity = '0'; toastTimer = setTimeout(() => toastEl.remove(), 450); }, ms || 3000);
+  }
 
   // ---------- the bar ----------
   function makeBar() {
@@ -71,11 +89,11 @@
 <button id="qe-done">Done</button>`;
     document.body.appendChild(bar);
     const pad = currentPadding();
-    $('#qe-maxw').value = MAXW;
+    $('#qe-maxw').value = P.maxw;
     $('#qe-padl').value = pad.l;
     $('#qe-padr').value = pad.r;
     $('#qe-unhide').addEventListener('change', e => unhide(e.target.checked));
-    $('#qe-maxw').addEventListener('input', e => { const v = +e.target.value; if (v >= 600) { MAXW = v; layout(); } });
+    $('#qe-maxw').addEventListener('input', e => { const v = +e.target.value; if (v >= 600) { P.maxw = v; P.layout(); } });
     $('#qe-padl').addEventListener('input', e => setPad('--padL', e.target.value));
     $('#qe-padr').addEventListener('input', e => setPad('--padR', e.target.value));
     $('#qe-look').addEventListener('click', snapshot);
@@ -106,11 +124,11 @@
       .map(r => r.cssText).join('\n').match(/var\(--padR,\s*(\d+)px\)\s+64px\s+var\(--padL,\s*(\d+)px\)/);
     return { l: isNaN(l) ? (m ? +m[2] : 96) : l, r: isNaN(r) ? (m ? +m[1] : 110) : r };
   }
-  function setPad(name, v) { document.documentElement.style.setProperty(name, (+v) + 'px'); layout(); }
+  function setPad(name, v) { document.documentElement.style.setProperty(name, (+v) + 'px'); P.layout(); }
   function snapshot() {
-    const [a, b] = marg();
+    const [a, b] = P.marg();
     const pad = currentPadding();
-    look = { def: [a, b], head: [tL, tR], desk, maxw: MAXW, padL: pad.l, padR: pad.r };
+    look = { def: [a, b], head: P.head, desk: P.desk, maxw: P.maxw, padL: pad.l, padR: pad.r };
     status('This window\'s layout will be the default when you Save.');
     refresh();
   }
@@ -124,7 +142,7 @@
       unhidden.forEach(m => { m.hidden = true; });
       unhidden = [];
     }
-    if (typeof sizeStage === 'function') sizeStage();
+    P.sizeStage();
   }
 
   // ---------- pictures ----------
@@ -154,14 +172,24 @@
   }
 
   function enter() {
+    if (!P) { toast('Edit mode can\u2019t start: this page is older than edit.js. Reload and try again.', 'bad', 6000); return; }
+    try { open(); }
+    catch (e) {
+      // Never half-open: put the page back and say what went wrong.
+      try { leave(true); } catch (e2) {}
+      toast('Edit mode failed to start: ' + e.message, 'bad', 8000);
+    }
+  }
+
+  function open() {
     on = true;
     if (!css.isConnected) document.head.appendChild(css);
     if (!picker.isConnected) document.body.appendChild(picker);
     document.documentElement.classList.add('qedit');
+    if (!frame) { frame = document.createElement('div'); frame.id = 'qe-frame'; frame.setAttribute('aria-hidden', 'true'); }
+    document.body.appendChild(frame);
     // The page plays itself when idle; not while editing.
-    reduce = true;
-    if (idleLoop) { clearInterval(idleLoop); idleLoop = null; }
-    clearTimeout(idleTimer);
+    P.pause();
     textEls().forEach(el => {
       original.set(el.dataset.e, el.innerHTML);
       el.contentEditable = el.children.length ? 'true' : 'plaintext-only';
@@ -169,9 +197,10 @@
     });
     makeBar();
     status('Click any outlined text to edit it; click a picture to replace it.');
+    toast('Edit mode is on. \u2303\u2325E or Done to leave.');
   }
 
-  function leave() {
+  function leave(quiet) {
     on = false;
     document.documentElement.classList.remove('qedit');
     textEls().forEach(el => {
@@ -182,9 +211,10 @@
     picEls().forEach(el => el.classList.remove('qe-changed'));
     unhide(false);
     texts.clear(); pictures.clear(); look = null; original.clear();
-    bar.remove(); bar = null;
-    reduce = sysReduce || calm;
-    wake();
+    if (bar) { bar.remove(); bar = null; }
+    if (frame) frame.remove();
+    if (P) P.resume();
+    if (!quiet) toast('Edit mode is off.', 'off', 2500);
   }
 
   // ---------- events: the page's own keys and clicks stand aside ----------

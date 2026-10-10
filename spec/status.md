@@ -13,10 +13,10 @@ Repo: `~/Projects/Qdeco`, pushed to **github.com/JasonHunt3r/Qdeco**
 **The site is live**: one page, `index.html` ("On the Margins"), with
 `privacy.html` (`spec/site.md`).
 
-**Edit in place is built** and pushed (`spec/edit-in-place.md`): the
-source surgery is checked in Node on the real file and the live site
-serves it. Edit mode in a real browser and a first real Save are not
-tried yet (B-2).
+**Edit in place is built** (`spec/edit-in-place.md`). Jason's first
+try on the live site found it did not start; the fix is committed
+here and checked in headless Chromium, and **is not live until it is
+pushed**. Safari and a real Save are still untried (B-2).
 
 **The site is published by a GitHub Actions step**
 (`spec/publishing.md`) that uploads only the site's files, so
