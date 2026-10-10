@@ -13,10 +13,10 @@ Repo: `~/Projects/Qdeco`, pushed to **github.com/JasonHunt3r/Qdeco**
 **The site is live**: one page, `index.html` ("On the Margins"), with
 `privacy.html` (`spec/site.md`).
 
-**Edit in place is built** (`spec/edit-in-place.md`). Jason's first
-try on the live site found it did not start; the fix is committed
-here and checked in headless Chromium, and **is not live until it is
-pushed**. Safari and a real Save are still untried (B-2).
+**Edit in place works on the live site** (`spec/edit-in-place.md`):
+Jason opened it in Safari and made a first real Save with his token
+(`b5da507`). A fix for leaving while a Save is still in flight is
+committed here and **is not live until it is pushed**.
 
 **The site is published by a GitHub Actions step**
 (`spec/publishing.md`) that uploads only the site's files, so
@@ -26,5 +26,5 @@ Jason's own files stay out of git (`.git/info/exclude`).
 
 ## Next
 
-1. **B-2**: Jason tries edit mode and a first Save on the live site.
-   A Save now publishes through the workflow; check that it still does.
+1. Push the Save fix, when Jason says.
+2. The open backlog items (`spec/backlog.md`).

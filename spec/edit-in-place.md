@@ -1,6 +1,6 @@
 # Edit in place
 
-**Status:** Built 2026-10-09 (`4041588`); fixed the same evening after Jason's first try found it did not start (`spec/history/2026-10-09-edit-mode-fix.md`). **Open work:** B-2, B-3.
+**Status:** Built 2026-10-09 (`4041588`); fixed the same evening after Jason's first try found it did not start (`spec/history/2026-10-09-edit-mode-fix.md`). **Open work:** B-3.
 
 Editing qdeco.com from the page itself. This was the "Edit in place"
 section of `spec/status.md`, moved here word for word on 2026-10-09.
@@ -46,6 +46,10 @@ he had left. Now:
   "Edit mode is off."
 - **If it cannot start**: a red note says why, and the page is put
   back as it was. It never half-opens.
+- **Saving**: while a Save is in flight, Done is disabled and ⌃⌥E
+  answers "Still saving. One moment." A finished Save shows "Saved.
+  The site updates in about a minute."; a failed one shows a red note
+  and the bar says why.
 
 ## The page's handles: `window.QPage` (part of the contract)
 

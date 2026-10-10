@@ -17,7 +17,7 @@
   const TOKEN_KEY = 'qdeco.edit.token';
   const P = window.QPage;   // the page's own handles (index.html, "the page's handles for edit mode")
 
-  let on = false, bar = null, unhidden = [];
+  let on = false, bar = null, unhidden = [], saving = false;
   const original = new Map();   // key → innerHTML when edit mode opened
   const texts = new Map();      // key → new innerHTML
   const pictures = new Map();   // key → new data URL
@@ -166,6 +166,9 @@
   // ---------- in and out ----------
   function toggle() {
     if (on) {
+      // A Save in flight still counts its changes as unsaved; leaving now would
+      // ask to lose them and undo text that is about to be committed.
+      if (saving) { toast('Still saving. One moment.', '', 2500); return; }
       if (changes() && !confirm(`${changes()} change${changes() === 1 ? '' : 's'} not saved. Leave edit mode and lose them?`)) return;
       leave();
     } else enter();
@@ -315,7 +318,7 @@
   }
 
   async function save() {
-    if (!changes()) return;
+    if (saving || !changes()) return;
     if (!token()) {
       $('#qe-tokenbox').hidden = false; $('#qe-token').focus();
       status('Saving needs your GitHub token (once, kept in this browser). <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">Make one</a>: only the Qdeco repository, Contents: Read and write.');
@@ -324,6 +327,7 @@
     }
     delete $('#qe-status').dataset.sticky;
     $('#qe-save').disabled = true;
+    saving = true; $('#qe-done').disabled = true;
     status('Saving…');
     try {
       const meta = await gh(`/contents/${FILE}?ref=${BRANCH}`);
@@ -342,11 +346,16 @@
       document.querySelectorAll('.qe-changed').forEach(el => el.classList.remove('qe-changed'));
       refresh();
       status(`Saved. qdeco.com updates in about a minute. <a href="${res.commit.html_url}" target="_blank" rel="noopener">The commit</a>`);
+      toast('Saved. The site updates in about a minute.', '', 4000);
     } catch (e) {
+      toast('Not saved. The bar says why.', 'bad', 5000);
       refresh();
       if (e.status === 401 || e.status === 403) status('GitHub refused the token (' + e.message + '). Forget it and paste a new one.');
       else if (e.status === 409 || e.status === 422) status('index.html changed on GitHub since this was opened. Nothing was saved; reload the page and make the edits again.');
       else status('Not saved: ' + e.message);
+    } finally {
+      saving = false;
+      if (bar) $('#qe-done').disabled = false;
     }
   }
 

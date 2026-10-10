@@ -39,3 +39,33 @@ comment, `let MAXW`); ⌃⌥E closes and the note clears. No page errors.
 
 **Not checked:** Safari, and a real Save with Jason's token. B-2 stays
 open for those.
+
+## Later the same evening: the first real Save
+
+After the fix was pushed (`89a64a4`), App Claude checked the live site
+in the Claude app's browser: edit mode opens and closes, and the
+working docs return "not found". Jason then found he had been pressing
+⌘⌥E, not ⌃⌥E; with the right keys it worked in Safari. He made a
+fine-grained token (Qdeco only, Contents: Read and write, 90 days) and
+saved an edit.
+
+**The Save worked** (Confirmed): commit `b5da507`, "Edit in place: 1
+text (m-bgtools.p1)", one line changed, published by the workflow
+within a minute. That closes B-2, whose entry read: "Jason tries edit
+mode in Safari and makes a first real Save. His first try found it did
+not start; the fix is checked in Chromium only and needs pushing
+first."
+
+**But the page told him it had not saved.** His words: "Clicked save.
+Then done, says it didn't save." Likely cause (Conjecture, from the
+code; his screen was not seen): Done was clicked while the Save was
+still in flight. Until GitHub answers, the edit still counts as
+unsaved, so leaving asked "1 change not saved. Leave edit mode and
+lose them?" and, on OK, put the old text back on screen while the
+commit went through anyway.
+
+**Fixed:** while a Save is in flight, Done is disabled and ⌃⌥E answers
+"Still saving. One moment."; a finished Save shows a note, "Saved. The
+site updates in about a minute.", and a failed one a red note.
+Checked in headless Chromium with a Save slowed to 2.5 seconds: leaving
+is refused during it, no dialog appears, and the edited text stays.

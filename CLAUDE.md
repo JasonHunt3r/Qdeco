@@ -45,6 +45,9 @@ in `~/Projects/CLAUDE.md` and run `tools/docs-check.sh`.
   `index-local-*.html`, `Drop Offs/`. They are listed in
   `.git/info/exclude`. Run `git status` before any commit and stage
   files by name, never `git add -A`.
+- **Pull before any local work.** A Save from edit mode commits
+  straight to `main` on GitHub, so the Mac's copy falls behind
+  without anyone touching it.
 - **Keep the edit-in-place contract** when editing `index.html` by
   hand (`spec/edit-in-place.md`, "The contract").
 - A retired page is kept in the repo under a dated name
