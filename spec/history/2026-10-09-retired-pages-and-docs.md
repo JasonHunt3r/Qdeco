@@ -57,3 +57,17 @@ So the likely story (Conjecture until checked in Safari): a real Save
 click landed during it, and the Save ending is what made Done look
 active again. The fix is Jason's to choose; nothing in `edit.js` was
 changed.
+
+## Later the same night: pushed, checked, and B-7 fixed
+
+- Pushed with Jason's go. After the publish, both retired pages answer
+  404; `qdeco.com`, `privacy.html` and the three PNGs answer 200 and
+  are byte-identical to the repo.
+- B-7: Jason chose "leave as soon as the Save lands". Done stays
+  enabled during a Save; pressed then (or ⌃⌥E), it reads "Leaving after
+  the Save…" and edit mode closes when the Save lands, with "Saved, and
+  edit mode is off." A failed Save keeps edit mode on with the edits.
+  Checked in Chromium and WebKit with GitHub faked (2.5 s round trips):
+  two rounds of Save then Done, a failed Save, Done with an unsaved
+  change (still asks) and Done with none. Not yet tried in Safari.
+

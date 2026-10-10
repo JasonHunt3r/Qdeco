@@ -1,6 +1,6 @@
 # Edit in place
 
-**Status:** Built 2026-10-09 (`4041588`); fixed the same evening after Jason's first try found it did not start (`spec/history/2026-10-09-edit-mode-fix.md`). Two Saves inside a minute land, checked by Jason in Safari after the Save fixes went live (`a5c9787`, `f68bbfa`). **Open work:** B-3, B-7.
+**Status:** Built 2026-10-09 (`4041588`); fixed the same evening after Jason's first try found it did not start (`spec/history/2026-10-09-edit-mode-fix.md`). Two Saves inside a minute land, checked by Jason in Safari after the Save fixes went live (`a5c9787`, `f68bbfa`). **Open work:** B-3.
 
 Editing qdeco.com from the page itself. This was the "Edit in place"
 section of `spec/status.md`, moved here word for word on 2026-10-09.
@@ -46,10 +46,12 @@ he had left. Now:
   "Edit mode is off."
 - **If it cannot start**: a red note says why, and the page is put
   back as it was. It never half-opens.
-- **Saving**: while a Save is in flight, Done is disabled and ⌃⌥E
-  answers "Still saving. One moment." A finished Save shows "Saved.
-  The site updates in about a minute."; a failed one shows a red note
-  and the bar says why.
+- **Saving**: while a Save is in flight, Done (or ⌃⌥E) doesn't leave
+  at once: the button reads "Leaving after the Save…" and edit mode
+  closes as soon as the Save lands (B-7, Jason's choice 2026-10-09). A
+  finished Save shows "Saved. The site updates in about a minute."; a
+  failed one shows a red note, the bar says why, and edit mode stays on
+  with the edits.
 - **Reading before writing**: every Save reads `index.html` fresh from
   GitHub (`cache: 'no-store'` and a time stamp on the address). GitHub
   lets a browser reuse that answer for 60 seconds, and a reused answer

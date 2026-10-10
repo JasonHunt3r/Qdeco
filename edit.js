@@ -17,7 +17,7 @@
   const TOKEN_KEY = 'qdeco.edit.token';
   const P = window.QPage;   // the page's own handles (index.html, "the page's handles for edit mode")
 
-  let on = false, bar = null, unhidden = [], saving = false;
+  let on = false, bar = null, unhidden = [], saving = false, leaveAfterSave = false;
   const original = new Map();   // key → innerHTML when edit mode opened
   const texts = new Map();      // key → new innerHTML
   const pictures = new Map();   // key → new data URL
@@ -167,8 +167,14 @@
   function toggle() {
     if (on) {
       // A Save in flight still counts its changes as unsaved; leaving now would
-      // ask to lose them and undo text that is about to be committed.
-      if (saving) { toast('Still saving. One moment.', '', 2500); return; }
+      // ask to lose them and undo text that is about to be committed. So Done
+      // (or ⌃⌥E) mid-Save leaves as soon as the Save lands (B-7).
+      if (saving) {
+        leaveAfterSave = true;
+        $('#qe-done').textContent = 'Leaving after the Save…';
+        status('Saving… Edit mode closes as soon as it lands.');
+        return;
+      }
       if (changes() && !confirm(`${changes()} change${changes() === 1 ? '' : 's'} not saved. Leave edit mode and lose them?`)) return;
       leave();
     } else enter();
@@ -330,7 +336,7 @@
     }
     delete $('#qe-status').dataset.sticky;
     $('#qe-save').disabled = true;
-    saving = true; $('#qe-done').disabled = true;
+    saving = true;
     status('Saving…');
     try {
       const what = [texts.size && `${texts.size} text`, pictures.size && `${pictures.size} picture${pictures.size === 1 ? '' : 's'}`,
@@ -363,7 +369,10 @@
       refresh();
       status(`Saved. qdeco.com updates in about a minute. <a href="${res.commit.html_url}" target="_blank" rel="noopener">The commit</a>`);
       toast('Saved. The site updates in about a minute.', '', 4000);
+      if (leaveAfterSave) { saving = false; leaveAfterSave = false; leave(true); toast('Saved, and edit mode is off. The site updates in about a minute.', 'off', 4000); }
     } catch (e) {
+      // Not saved: stay in edit mode with the edits, whatever Done asked.
+      leaveAfterSave = false;
       toast('Not saved. The bar says why.', 'bad', 5000);
       refresh();
       if (e.status === 401 || e.status === 403) status('GitHub refused the token (' + e.message + '). Forget it and paste a new one.');
@@ -371,7 +380,7 @@
       else status('Not saved: ' + e.message);
     } finally {
       saving = false;
-      if (bar) $('#qe-done').disabled = false;
+      if (bar) $('#qe-done').textContent = 'Done';
     }
   }
 
