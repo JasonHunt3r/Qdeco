@@ -26,7 +26,8 @@ jobs:
             --exclude '.git*' --exclude '_site' \
             --exclude 'CLAUDE.md' --exclude 'README.md' \
             --exclude 'spec' --exclude 'tools' --exclude '.claude' \
-            --exclude 'Drop Offs'
+            --exclude 'Drop Offs' \
+            --exclude 'index-retired-*'
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site
