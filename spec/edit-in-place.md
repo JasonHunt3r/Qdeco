@@ -1,6 +1,6 @@
 # Edit in place
 
-**Status:** Built 2026-10-09 (`4041588`); fixed the same evening after Jason's first try found it did not start (`spec/history/2026-10-09-edit-mode-fix.md`). **Open work:** B-3, B-6.
+**Status:** Built 2026-10-09 (`4041588`); fixed the same evening after Jason's first try found it did not start (`spec/history/2026-10-09-edit-mode-fix.md`). Two Saves inside a minute land, checked by Jason in Safari after the Save fixes went live (`a5c9787`, `f68bbfa`). **Open work:** B-3, B-7.
 
 Editing qdeco.com from the page itself. This was the "Edit in place"
 section of `spec/status.md`, moved here word for word on 2026-10-09.
