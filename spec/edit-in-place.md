@@ -1,6 +1,6 @@
 # Edit in place
 
-**Status:** Built 2026-10-09 (`4041588`); fixed the same evening after Jason's first try found it did not start (`spec/history/2026-10-09-edit-mode-fix.md`). **Open work:** B-3.
+**Status:** Built 2026-10-09 (`4041588`); fixed the same evening after Jason's first try found it did not start (`spec/history/2026-10-09-edit-mode-fix.md`). **Open work:** B-3, B-6.
 
 Editing qdeco.com from the page itself. This was the "Edit in place"
 section of `spec/status.md`, moved here word for word on 2026-10-09.
@@ -50,6 +50,11 @@ he had left. Now:
   answers "Still saving. One moment." A finished Save shows "Saved.
   The site updates in about a minute."; a failed one shows a red note
   and the bar says why.
+- **Reading before writing**: every Save reads `index.html` fresh from
+  GitHub (`cache: 'no-store'` and a time stamp on the address). GitHub
+  lets a browser reuse that answer for 60 seconds, and a reused answer
+  carries an old sha that GitHub then refuses (409). A 409 is retried
+  once from a fresh read.
 
 ## The page's handles: `window.QPage` (part of the contract)
 

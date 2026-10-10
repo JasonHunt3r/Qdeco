@@ -14,9 +14,11 @@ Repo: `~/Projects/Qdeco`, pushed to **github.com/JasonHunt3r/Qdeco**
 `privacy.html` (`spec/site.md`).
 
 **Edit in place works on the live site** (`spec/edit-in-place.md`):
-Jason opened it in Safari and made a first real Save with his token
-(`b5da507`). A fix for leaving while a Save is still in flight is
-committed here and **is not live until it is pushed**.
+Jason edits in Safari and Saves with his token. Until the two fixes
+below are pushed, **only the first Save in any minute lands**; a second
+one is refused. Committed here and **not live until pushed**: Saves
+always read the fresh file from GitHub (the cause of the refusals), and
+Done waits for a Save in flight. Checked in Chromium only (B-6).
 
 **The site is published by a GitHub Actions step**
 (`spec/publishing.md`) that uploads only the site's files, so
@@ -26,5 +28,5 @@ Jason's own files stay out of git (`.git/info/exclude`).
 
 ## Next
 
-1. Push the Save fix, when Jason says.
+1. Push the two Save fixes, when Jason says; then B-6.
 2. The open backlog items (`spec/backlog.md`).

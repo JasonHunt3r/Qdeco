@@ -69,3 +69,28 @@ commit went through anyway.
 site updates in about a minute.", and a failed one a red note.
 Checked in headless Chromium with a Save slowed to 2.5 seconds: leaving
 is refused during it, no dialog appears, and the edited text stays.
+
+**The real cause turned up the same evening.** Jason: "it saved it.
+Then I changed it back and saved it again, but that didn't save it and
+clicking done said you have 1 unsaved change." And again after Done
+and back in: the first Save of a visit worked, the next did not. So
+the in-flight story above was at most part of it.
+
+Cause (Confirmed): GitHub answers the read of `index.html` with
+`cache-control: max-age=60`, so for a minute the browser reused its
+copy without asking. That copy carried the file's sha from before the
+last Save; the write sent that old sha and GitHub refused it (409).
+The bar did say "index.html changed on GitHub since this was opened",
+but nothing drew the eye to it. Reproduced in headless Chromium
+against a stand-in for GitHub with the same cache header and sha rule:
+first Save ok, second and third refused, the server seeing one read
+and three writes.
+
+**Fixed:** every GitHub request is sent `cache: 'no-store'`, the read
+carries a time stamp so its address is new each time, and a 409 is
+retried once from a fresh read (the edits are found by key, so that is
+safe). The refusal message now says the edits are still on screen and
+to press Save again. Same stand-in, after the fix: three Saves in a
+row, one of them after Done and back in, all land; three reads, three
+writes. Not checked in Safari; Jason's next two Saves in a row are
+that check (B-6).

@@ -306,8 +306,11 @@
     for (let i = 0; i < bin.length; i++) u[i] = bin.charCodeAt(i);
     return new TextDecoder().decode(u);
   };
+  // cache: 'no-store' matters. GitHub lets a browser reuse an answer for 60
+  // seconds, and a reused index.html carries the sha from before the last
+  // Save, so a second Save inside a minute was refused (409).
   async function gh(path, opts = {}) {
-    const r = await fetch(API + path, { ...opts, headers: {
+    const r = await fetch(API + path, { cache: 'no-store', ...opts, headers: {
       Authorization: 'Bearer ' + token(), Accept: 'application/vnd.github+json',
       'X-GitHub-Api-Version': '2022-11-28', ...(opts.headers || {}) } });
     if (!r.ok) {
@@ -330,16 +333,29 @@
     saving = true; $('#qe-done').disabled = true;
     status('Saving…');
     try {
-      const meta = await gh(`/contents/${FILE}?ref=${BRANCH}`);
-      let src = meta.content ? b64decode(meta.content) : b64decode((await gh(`/git/blobs/${meta.sha}`)).content);
-      for (const [k, html] of texts) src = replaceInner(src, k, html);
-      for (const [k, url] of pictures) src = replaceSrc(src, k, url);
-      if (look) src = applyLook(src, look);
       const what = [texts.size && `${texts.size} text`, pictures.size && `${pictures.size} picture${pictures.size === 1 ? '' : 's'}`,
         look && 'the default layout'].filter(Boolean).join(', ');
-      const res = await gh(`/contents/${FILE}`, { method: 'PUT', body: JSON.stringify({
-        message: `Edit in place: ${what} (${[...texts.keys(), ...pictures.keys()].join(', ') || 'layout'})`,
-        content: b64encode(src), sha: meta.sha, branch: BRANCH }) });
+      let res;
+      for (let tries = 0; ; tries++) {
+        // Always the file as it is on GitHub this second (the stamp makes the
+        // address new each time, for a browser that reuses answers anyway).
+        const meta = await gh(`/contents/${FILE}?ref=${BRANCH}&_=${Date.now()}`);
+        let src = meta.content ? b64decode(meta.content) : b64decode((await gh(`/git/blobs/${meta.sha}`)).content);
+        for (const [k, html] of texts) src = replaceInner(src, k, html);
+        for (const [k, url] of pictures) src = replaceSrc(src, k, url);
+        if (look) src = applyLook(src, look);
+        try {
+          res = await gh(`/contents/${FILE}`, { method: 'PUT', body: JSON.stringify({
+            message: `Edit in place: ${what} (${[...texts.keys(), ...pictures.keys()].join(', ') || 'layout'})`,
+            content: b64encode(src), sha: meta.sha, branch: BRANCH }) });
+          break;
+        } catch (e) {
+          // 409: the file moved between the read and the write. The edits are
+          // found by key in the fresh file, so one more go is safe.
+          if (e.status !== 409 || tries) throw e;
+          await new Promise(r => setTimeout(r, 1500));
+        }
+      }
       // What's saved is the new starting point.
       for (const [k, html] of texts) original.set(k, html);
       texts.clear(); pictures.clear(); look = null;
@@ -351,7 +367,7 @@
       toast('Not saved. The bar says why.', 'bad', 5000);
       refresh();
       if (e.status === 401 || e.status === 403) status('GitHub refused the token (' + e.message + '). Forget it and paste a new one.');
-      else if (e.status === 409 || e.status === 422) status('index.html changed on GitHub since this was opened. Nothing was saved; reload the page and make the edits again.');
+      else if (e.status === 409 || e.status === 422) status('GitHub refused the Save: index.html there kept changing (' + e.message + '). Nothing was saved. Your edits are still here; wait a moment and press Save again.');
       else status('Not saved: ' + e.message);
     } finally {
       saving = false;
