@@ -3,7 +3,8 @@
 **Status:** Set up 2026-10-14 (night): the base by Jason, by hand, with App
 Claude; SharkAttack's home by Shakedown's `server/deploy/qdeco-setup.sh`
 (B-31 step 3, `~/Projects/Shakedown/spec/sharkattack-silo.md`), run by
-Jason with sudo. **Open work:** none here; Shakedown's B-31 has its steps.
+Jason with sudo. **Open work:** none here (SharkAttack's steps are in
+Shakedown's backlog).
 
 Qdeco's own server, on Jason's DigitalOcean account. qdeco.com itself stays
 on GitHub Pages (`spec/publishing.md`); only `shakedown.qdeco.com` points
