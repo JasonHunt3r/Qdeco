@@ -25,6 +25,7 @@ file is.
 | `spec/site.md` | What the site is made of, and which of Jason's files are local only. |
 | `spec/edit-in-place.md` | Editing the live page with ⌃⌥E, and **the contract** that hand edits to `index.html` must keep. Read before touching `index.html` or `edit.js`. |
 | `spec/publishing.md` | How the site is published: a GitHub Actions step that uploads only the site's files. Read before adding a folder or changing the workflow. |
+| `spec/droplet.md` | The Qdeco droplet (2026-10-14): what's on it, the logins, the firewall, the services, deploys, restarts, backups. Read before touching the server. |
 | `spec/history/` | Dated events. **Never read for current rules or state**, only for *why*. Start at its README. |
 
 `Drop Offs/` is Jason's inbox: look there first, read what is new,
