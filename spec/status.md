@@ -10,6 +10,10 @@ Repo: `~/Projects/Qdeco`, pushed to **github.com/JasonHunt3r/Qdeco**
 
 ## Where it stands
 
+**Qdeco has a droplet of its own** (2026-10-14): `shakedown.qdeco.com`,
+SharkAttack (Shakedown's server) and its page; `spec/droplet.md`. qdeco.com
+itself stays on Pages.
+
 **The site is live**: one page, `index.html` ("On the Margins"), with
 `privacy.html` (`spec/site.md`).
 
