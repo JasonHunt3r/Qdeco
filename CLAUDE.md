@@ -29,8 +29,11 @@ file is.
 | `spec/history/` | Dated events. **Never read for current rules or state**, only for *why*. Start at its README. |
 
 `Drop Offs/` is Jason's inbox: look there first, read what is new,
-then move each file where it belongs. At every clear, follow the steps
-in `~/Projects/CLAUDE.md` and run `tools/docs-check.sh`.
+then move each file where it belongs; its README stays, local only, as
+the inbox is ignored here (a public repo, D12). `tools/order-gate.sh`
+checks the inboxes before every commit; in a new clone, switch it on
+with `git config core.hooksPath tools/hooks`. At every clear, follow the
+steps in `~/Projects/CLAUDE.md` and run `tools/docs-check.sh`.
 
 ## Rules
 
