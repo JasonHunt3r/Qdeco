@@ -3,7 +3,7 @@
 Open items only. A finished item leaves this file: its story goes to
 the day's file in `spec/history/`.
 
-Next free ID: B-10
+Next free ID: B-11
 
 ## Open
 
@@ -11,3 +11,4 @@ Next free ID: B-10
 - **B-5** The page's on-screen names still say BGTools / UP Scaler; the family's names are now **BGtools** and **UP scaler** (RhythmIO repo, 2026-10-09).
 - **B-8** When an icon master (`*-icon.png`) changes, nothing says the page's inline copy is now behind (`spec/site.md`, "Where the page's pictures come from").
 - **B-9** What a browser tab, a search result and a pasted link show: the home page's `<title>` is "Qdeco Presenter Demo", and it has no description, no link-preview image and no favicon. The wording and the picture are Jason's.
+- **B-10** · **Idea, for later: a "What does SL mean?" roller** for Sharky SL (Shakedown's B-26; App Claude's order, 2026-10-13). Slot-machine tension, like a Magic 8 Ball, landing on one of: Second Look, Side Look, Side Lister, Separate Looker, Speedy Logistics, Steno Log, Shakedown Ledger, Sidelines, Spot Log, Status Light. "SL" is never spelled out in the app or its listing (Jason: "we're enigmatic that way").
