@@ -8,6 +8,7 @@ was true on its date and may not be now. Current state is
 | File | What it is | Superseded by |
 |---|---|---|
 | `2026-10-14-droplet.md` | Qdeco's own droplet: made by Jason, set up for SharkAttack at `shakedown.qdeco.com` | `spec/droplet.md` |
+| `2026-10-16-housework.md` | B-10 committed; the order gate and hook; the inbox README kept local | `CLAUDE.md` |
 | `2026-10-09-edit-in-place.md` | How edit in place came about: the options, Jason's choice, what was built and pushed | `spec/edit-in-place.md` |
 | `2026-10-09-projects-standard.md` | Qdeco set up as a full project under the Projects standard: `CLAUDE.md`, a backlog, status split into specs, the publishing plan | The current docs |
 | `2026-10-09-publishing-switch.md` | B-1: publishing moved from "deploy from branch" to a GitHub Actions step, and the working docs tracked in git | `spec/publishing.md` |
